@@ -1,0 +1,56 @@
+{
+    "name": "IncrementalLoadPipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "LookupLastWatermark",
+                "type": "Lookup",
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlSource",
+                        "sqlReaderQuery": "SELECT MAX(watermark_column) as LastWatermark FROM your_table"
+                    }
+                },
+                "outputs": [
+                    {
+                        "name": "LastWatermark"
+                    }
+                ]
+            },
+            {
+                "name": "CopyIncrementalData",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "LookupLastWatermark",
+                        "dependencyConditions": ["Succeeded"]
+                    }
+                ],
+                "inputs": [
+                    {
+                        "referenceName": "SourceDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "DestinationDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlSource",
+                        "sqlReaderQuery": {
+                            "value": "SELECT * FROM your_table WHERE watermark_column > @{activity('LookupLastWatermark').output.LastWatermark}"
+                        }
+                    },
+                    "sink": {
+                        "type": "SqlSink",
+                        "writeBatchSize": 1000
+                    }
+                }
+            }
+        ]
+    }
+}

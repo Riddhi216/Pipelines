@@ -1,0 +1,29 @@
+{
+    "name": "MonthlyLastSaturdayTrigger",
+    "properties": {
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Month",
+                "interval": 1,
+                "startTime": "2023-01-01T00:00:00Z",
+                "schedule": {
+                    "monthlyOccurrences": [
+                        {
+                            "day": "Saturday",
+                            "occurrence": -1
+                        }
+                    ]
+                }
+            }
+        },
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "YourPipelineName",
+                    "type": "PipelineReference"
+                }
+            }
+        ]
+    }
+}

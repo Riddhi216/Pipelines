@@ -1,0 +1,33 @@
+{
+    "name": "FtpToAzureSqlPipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "CopyFromFtp",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "FtpSourceDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AzureSqlDestinationDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "FtpSource",
+                        "fileName": "your_file.csv"
+                    },
+                    "sink": {
+                        "type": "SqlSink",
+                        "writeBatchSize": 1000
+                    }
+                }
+            }
+        ]
+    }
+}

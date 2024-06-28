@@ -1,0 +1,9 @@
+{
+    "name": "LocalServerLinkedService",
+    "properties": {
+        "type": "SelfHosted",
+        "typeProperties": {
+            "connectionString": "your_connection_string"
+        }
+    }
+}
