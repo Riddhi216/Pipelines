@@ -1,0 +1,33 @@
+{
+    "name": "CopyPipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "CopyData",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "SourceDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "DestinationDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlSource",
+                        "sqlReaderQuery": "SELECT * FROM your_table"
+                    },
+                    "sink": {
+                        "type": "SqlSink",
+                        "writeBatchSize": 1000
+                    }
+                }
+            }
+        ]
+    }
+}
