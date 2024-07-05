@@ -1,0 +1,17 @@
+{
+    "name": "H_ECOM_ORDER_Dataset",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureDataLakeStorageLinkedService",
+            "type": "LinkedServiceReference"
+        },
+        "folderPath": "path/to/folder",
+        "fileName": "H_ECOM_ORDER_*.csv",
+        "format": {
+            "type": "TextFormat",
+            "columnDelimiter": ",",
+            "rowDelimiter": "\n",
+            "firstRowAsHeader": true
+        }
+    }
+}

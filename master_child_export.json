@@ -1,0 +1,36 @@
+{
+    "name": "master_child_export_DataFlow",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "name": "StagingSource",
+                    "dataset": {
+                        "referenceName": "StagingDataset",
+                        "type": "DatasetReference"
+                    }
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "DerivedColumn",
+                    "type": "DerivedColumn",
+                    "expression": {
+                        "Date": "toDate(substring($$FILEPATH, 19, 8), 'yyyyMMdd')",
+                        "DateKey": "substring($$FILEPATH, 19, 8)"
+                    }
+                }
+            ],
+            "sinks": [
+                {
+                    "name": "master_child_Sink",
+                    "dataset": {
+                        "referenceName": "master_child_Dataset",
+                        "type": "DatasetReference"
+                    }
+                }
+            ]
+        }
+    }
+}

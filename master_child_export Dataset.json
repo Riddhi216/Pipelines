@@ -1,0 +1,17 @@
+{
+    "name": "master_child_export_Dataset",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureDataLakeStorageLinkedService",
+            "type": "LinkedServiceReference"
+        },
+        "folderPath": "path/to/folder",
+        "fileName": "master_child_export-*.csv",
+        "format": {
+            "type": "TextFormat",
+            "columnDelimiter": ",",
+            "rowDelimiter": "\n",
+            "firstRowAsHeader": true
+        }
+    }
+}

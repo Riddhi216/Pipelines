@@ -1,0 +1,35 @@
+{
+    "name": "CUST_MSTR_DataFlow",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "name": "StagingSource",
+                    "dataset": {
+                        "referenceName": "StagingDataset",
+                        "type": "DatasetReference"
+                    }
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "DerivedColumn",
+                    "type": "DerivedColumn",
+                    "expression": {
+                        "Date": "toDate(substring($$FILEPATH, 10, 8), 'yyyyMMdd')"
+                    }
+                }
+            ],
+            "sinks": [
+                {
+                    "name": "CUST_MSTR_Sink",
+                    "dataset": {
+                        "referenceName": "CUST_MSTR_Dataset",
+                        "type": "DatasetReference"
+                    }
+                }
+            ]
+        }
+    }
+}
